@@ -1,6 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
 import { quiz } from "../reducers/quiz";
 
+/* 
+  Progress Indicator: Display the current question number 
+  out of the total and show progress (e.g., "Question 1/5").
+  Get the current and total 
+*/
+
 export const CurrentQuestion = () => {
   const dispatch = useDispatch();
   // Getting the current question from the store
@@ -10,6 +16,11 @@ export const CurrentQuestion = () => {
 
   const answer = useSelector(
     (state) => state.quiz.answers[state.quiz.currentQuestionIndex]
+  );
+
+  // Use currentQuestionIndex to get the current question number
+  const currentQuestionIndex = useSelector(
+    (state) => state.quiz.currentQuestionIndex
   );
 
   if (!question) {
@@ -32,6 +43,9 @@ export const CurrentQuestion = () => {
 
   return (
     <>
+      <p>
+        Question: {currentQuestionIndex} / {question.options.length + 1}
+      </p>
       <h2>Current question: {question.id}</h2>
       <p>{question.questionText}</p>
 
