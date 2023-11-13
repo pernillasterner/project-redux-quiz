@@ -1,4 +1,3 @@
-import React from "react";
 import { useSelector } from "react-redux";
 
 export const CurrentQuestion = () => {
@@ -10,9 +9,14 @@ export const CurrentQuestion = () => {
     return <h1>Oh no! I could not find the current question!</h1>;
   }
 
+  const handleClick = (event) => {
+    // TODO send the captureSquare action
+  };
+
   return (
-    <div>
-      <h1>Question: {question.questionText}</h1>
-    </div>
+    <>
+      <h2>Current question: {question.id}</h2>
+      <p>{question.questionText}</p>
+    </>
   );
 };
