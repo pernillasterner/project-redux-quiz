@@ -2,9 +2,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { quiz } from "../reducers/quiz";
 
 /* 
-  Progress Indicator: Display the current question number 
-  out of the total and show progress (e.g., "Question 1/5").
-  Get the current and total 
+  Next Question Button: Implement a button to move to the 
+  next question after the user selects an answer.
 */
 
 export const CurrentQuestion = () => {
@@ -41,6 +40,11 @@ export const CurrentQuestion = () => {
     );
   };
 
+  // By clicking on the submit I should add + to question index? in the handler
+  const handleSubmit = () => {
+    dispatch(quiz.actions.goToNextQuestion());
+  };
+
   return (
     <>
       <p>
@@ -56,6 +60,8 @@ export const CurrentQuestion = () => {
           </li>
         ))}
       </ul>
+      <p>Submit button</p>
+      <button onClick={handleSubmit}>continue</button>
 
       {answer &&
         (answer.isCorrect ? (
