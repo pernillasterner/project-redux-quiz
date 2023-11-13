@@ -1,27 +1,61 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// Change these to your own questions!
 const questions = [
   {
     id: 1,
-    questionText: "Who set the Olympic record for the 100m dash in 2012?",
-    options: ["Usain Bolt", "Justin Gatlin", "Tyson Gay", "Asafa Powell"],
-    correctAnswerIndex: 0
+    questionText:
+      "What does the term 'minimalism' in interior design refer to?",
+    options: [
+      "Maximal use of colors",
+      "Excessive ornamentation",
+      "Simple and uncluttered spaces",
+      "Eclectic design styles",
+    ],
+    correctAnswerIndex: 2,
   },
   {
     id: 2,
+    questionText: "Which material is commonly used for creating accent walls?",
+    options: ["Fabric", "Concrete", "Wallpaper", "Metal"],
+    correctAnswerIndex: 2,
+  },
+  {
+    id: 3,
+    questionText: "What is the purpose of an area rug in interior design?",
+    options: [
+      "To add warmth and comfort",
+      "To cover imperfections in the floor",
+      "To reflect natural light",
+      "To create a modern look",
+    ],
+    correctAnswerIndex: 0,
+  },
+  {
+    id: 4,
     questionText:
-      "When was Michael Phelps last named male World Swimmer of the Year?",
-    options: ["2012", "2014", "2016", "2018"],
-    correctAnswerIndex: 2
-  }
+      "Which color scheme uses colors that are next to each other on the color wheel?",
+    options: ["Complementary", "Monochromatic", "Analogous", "Triadic"],
+    correctAnswerIndex: 2,
+  },
+  {
+    id: 5,
+    questionText:
+      "What does the term 'feng shui' relate to in interior design?",
+    options: [
+      "Use of bold colors",
+      "Spatial arrangement for harmony",
+      "Vintage and antique furniture",
+      "Geometric patterns",
+    ],
+    correctAnswerIndex: 1,
+  },
 ];
 
 const initialState = {
   questions,
   answers: [],
   currentQuestionIndex: 0,
-  quizOver: false
+  quizOver: false,
 };
 
 export const quiz = createSlice({
@@ -64,7 +98,7 @@ export const quiz = createSlice({
         answerIndex,
         question,
         answer: question.options[answerIndex],
-        isCorrect: question.correctAnswerIndex === answerIndex
+        isCorrect: question.correctAnswerIndex === answerIndex,
       });
     },
 
@@ -92,6 +126,6 @@ export const quiz = createSlice({
      */
     restart: () => {
       return initialState;
-    }
-  }
+    },
+  },
 });
