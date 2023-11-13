@@ -8,6 +8,10 @@ export const CurrentQuestion = () => {
     (state) => state.quiz.questions[state.quiz.currentQuestionIndex]
   );
 
+  const answer = useSelector(
+    (state) => state.quiz.answers[state.quiz.currentQuestionIndex]
+  );
+
   if (!question) {
     return <h1>Oh no! I could not find the current question!</h1>;
   }
@@ -16,6 +20,7 @@ export const CurrentQuestion = () => {
    * returns a payload with questionId and answerIndex
    */
   const handleSubmitAnswer = (answerIndex) => {
+    // Use dispatch to send the answer to the store
     // Use the quiz action to handle the submit answer
     dispatch(
       quiz.actions.submitAnswer({
@@ -37,6 +42,16 @@ export const CurrentQuestion = () => {
           </li>
         ))}
       </ul>
+
+      {answer &&
+        (answer.isCorrect ? (
+          <p>You got this right!</p>
+        ) : (
+          <>
+            <p>You got this wrong</p>
+            <p>The correct answer is: {answer.answer}</p>
+          </>
+        ))}
     </>
   );
 };
