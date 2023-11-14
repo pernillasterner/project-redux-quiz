@@ -2,8 +2,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { quiz } from "../reducers/quiz";
 
 /* 
-  Next Question Button: Implement a button to move to the 
-  next question after the user selects an answer.
+  Quiz Completion: Check if the quiz is over and 
+  display a summary screen showing correct/incorrect answers.
 */
 
 export const CurrentQuestion = () => {
@@ -17,10 +17,15 @@ export const CurrentQuestion = () => {
     (state) => state.quiz.answers[state.quiz.currentQuestionIndex]
   );
 
+  const answers = useSelector((state) => state.quiz.answers);
+  console.log(answers);
   // Use currentQuestionIndex to get the current question number
   const currentQuestionIndex = useSelector(
     (state) => state.quiz.currentQuestionIndex
   );
+
+  // return true or false
+  const quizOver = useSelector((state) => state.quiz.quizOver);
 
   if (!question) {
     return <h1>Oh no! I could not find the current question!</h1>;
@@ -47,31 +52,47 @@ export const CurrentQuestion = () => {
 
   return (
     <>
-      <p>
-        Question: {currentQuestionIndex} / {question.options.length + 1}
-      </p>
-      <h2>Current question: {question.id}</h2>
-      <p>{question.questionText}</p>
+      {!quizOver ? (
+        <>
+          <p>
+            Question: {currentQuestionIndex + 1} / {question.options.length + 1}
+          </p>
+          <h2>Current question: {question.id}</h2>
+          <p>{question.questionText}</p>
 
-      <ul>
-        {question.options.map((option, index) => (
-          <li key={index}>
-            <button onClick={() => handleSubmitAnswer(index)}>{option}</button>
-          </li>
-        ))}
-      </ul>
-      <p>Submit button</p>
-      <button onClick={handleSubmit}>continue</button>
+          <ul>
+            {question.options.map((option, index) => (
+              <li key={index}>
+                <button onClick={() => handleSubmitAnswer(index)}>
+                  {option}
+                </button>
+              </li>
+            ))}
+          </ul>
 
-      {answer &&
-        (answer.isCorrect ? (
-          <p>You got this right!</p>
-        ) : (
-          <>
-            <p>You got this wrong</p>
-            <p>The correct answer is: {answer.answer}</p>
-          </>
-        ))}
+          <p>Submit button</p>
+          <button onClick={handleSubmit}>Continue</button>
+
+          {answer &&
+            (answer.isCorrect ? (
+              <p>You got this right!</p>
+            ) : (
+              <>
+                <p>You got this wrong</p>
+                <p>The correct answer is: {answer.answer}</p>
+              </>
+            ))}
+        </>
+      ) : (
+        <>
+          <p>Your answers</p>
+          <ul>
+            {answers.map((a, index) => (
+              <li key={index}>{a.answer}</li>
+            ))}
+          </ul>
+        </>
+      )}
     </>
   );
 };
