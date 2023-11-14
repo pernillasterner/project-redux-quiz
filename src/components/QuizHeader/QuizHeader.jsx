@@ -2,6 +2,12 @@ import { useSelector } from "react-redux";
 import { Counter } from "./Counter";
 import { ProgressBar } from "./ProgressBar";
 import "./QuizHeader.scss";
+import { Score } from "./Score";
+import { Timer } from "./Timer";
+
+/**
+ * Score System: Implement scoring for correct and deduct points for incorrect answers.
+ */
 
 export const QuizHeader = () => {
   const question = useSelector(
@@ -18,10 +24,14 @@ export const QuizHeader = () => {
         currentQuestion={currentQuestionIndex}
         totalQuestions={question.options.length}
       />
-      <Counter
-        currentQuestionIndex={currentQuestionIndex}
-        totalQuestions={question.options.length}
-      />
+      <div className="counters">
+        <Counter
+          currentQuestionIndex={currentQuestionIndex}
+          totalQuestions={question.options.length}
+        />
+        <Timer />
+        <Score />
+      </div>
     </>
   );
 };

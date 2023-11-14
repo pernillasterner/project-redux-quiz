@@ -11,3 +11,39 @@
     height: 100%;
   }
 }
+
+// Counters
+.counters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .counter,
+  .score {
+    background-color: var(--secondary-bg-color);
+    color: var(--light-grey);
+    border-radius: 30px;
+    font-size: 0.8rem;
+    padding: 6px 20px;
+    margin: 4em 0;
+
+    .active {
+      color: #fff;
+    }
+  }
+
+  .timer {
+    width: 70px;
+    height: 70px;
+    background: #fff;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .logo {
+      color: var(--secondary-color);
+      font-size: 2.2rem;
+    }
+  }
+}
