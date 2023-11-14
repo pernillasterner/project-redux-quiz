@@ -1,12 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { quiz } from "../reducers/quiz";
-// import AnswerStatus from "./AnswerStatus";
 import "./CurrentQuestion.scss";
 import { QuizHeader } from "./QuizHeader/QuizHeader";
-
-/**
- * Score System: Implement scoring for correct and deduct points for incorrect answers.
- */
 
 export const CurrentQuestion = () => {
   const dispatch = useDispatch();
@@ -58,12 +53,14 @@ export const CurrentQuestion = () => {
         <>
           <QuizHeader />
 
-          {!answer && <h2>{question.questionText}</h2>}
           <div className="checkAnswerContainer">
+            {!answer && (
+              <h2 className="questionText">{question.questionText}</h2>
+            )}
             {answer &&
               (answer.isCorrect ? (
                 <>
-                  <h4>🎉 Congratulations!</h4>
+                  <h2>🎉 Congratulations!</h2>
                   <p>
                     Right answer is: <br /> {answer.answer}
                   </p>
@@ -78,7 +75,7 @@ export const CurrentQuestion = () => {
               ))}
           </div>
           {/* until this.... */}
-          <ul>
+          <ul className="questionContainer">
             {question.options.map((option, index) => (
               <li key={index}>
                 <button onClick={() => handleSubmitAnswer(index)}>

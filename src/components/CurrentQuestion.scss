@@ -4,37 +4,30 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  // justify-content: space-around;
   box-sizing: border-box;
-  min-width: 320px;
-  max-width: 400px;
+  // min-width: 320px;
+  // max-width: 400px;
+  width: 320px;
 
-  .counter {
-    background-color: var(--secondary-bg-color);
-    color: var(--light-grey);
-    border-radius: 30px;
-    font-size: 0.8rem;
-    padding: var(--general-mini-padding);
-    margin: 4em 0;
-
-    .active {
-      color: #fff;
-    }
-  }
-
-  //   Answer container
+  // Answer container
   .checkAnswerContainer {
+    height: 100px;
     text-align: center;
 
-    h4 {
-      font-size: 1.1rem;
+    .questionText {
+      text-align: start;
     }
+
     p {
       padding: var(--general-mini-padding);
       font-size: 0.8rem;
       font-weight: 500;
       white-space: break-spaces;
     }
+  }
+
+  .questionContainer {
+    padding: var(--general-padding) 0;
   }
   @media (min-width: 670px) {
     height: inherit;
