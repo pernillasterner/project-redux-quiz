@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { quiz } from "../reducers/quiz";
 // import AnswerStatus from "./AnswerStatus";
 import "./CurrentQuestion.scss";
+import { ProgressBar } from "./ProgressBar";
 
 /**
  * Highlight Correct Answer (Stretch Goal): Implement highlighting the correct
@@ -14,7 +15,7 @@ export const CurrentQuestion = () => {
   const question = useSelector(
     (state) => state.quiz.questions[state.quiz.currentQuestionIndex]
   );
-
+  console.log(question.id);
   const answer = useSelector(
     (state) => state.quiz.answers[state.quiz.currentQuestionIndex]
   );
@@ -56,6 +57,11 @@ export const CurrentQuestion = () => {
     <div className="quizContainer">
       {!quizOver ? (
         <>
+          {/* Need to send in questionId */}
+          <ProgressBar
+            currentQuestion={question.id}
+            totalQuestions={question.options.length + 1}
+          />
           <div className="counter">
             <span className={currentQuestionIndex === 0 ? "active" : ""}>
               {currentQuestionIndex + 1}
