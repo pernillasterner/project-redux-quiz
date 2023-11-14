@@ -1,10 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { quiz } from "../reducers/quiz";
-
-/* 
-  Quiz Completion: Check if the quiz is over and 
-  display a summary screen showing correct/incorrect answers.
-*/
+import "./CurrentQuestion.scss";
 
 export const CurrentQuestion = () => {
   const dispatch = useDispatch();
@@ -51,15 +47,16 @@ export const CurrentQuestion = () => {
   };
 
   return (
-    <>
+    <div className="quizContainer">
       {!quizOver ? (
         <>
-          <p>
-            Question: {currentQuestionIndex + 1} / {question.options.length + 1}
-          </p>
-          <h2>Current question: {question.id}</h2>
-          <p>{question.questionText}</p>
-
+          <div className="counter">
+            <span className={currentQuestionIndex === 0 ? "active" : ""}>
+              {currentQuestionIndex + 1}
+            </span>
+            <span> / {question.options.length + 1}</span>
+          </div>
+          <h2>{question.questionText}</h2>
           <ul>
             {question.options.map((option, index) => (
               <li key={index}>
@@ -69,9 +66,9 @@ export const CurrentQuestion = () => {
               </li>
             ))}
           </ul>
-
-          <p>Submit button</p>
-          <button onClick={handleSubmit}>Continue</button>
+          <button className="submit" onClick={handleSubmit}>
+            continue
+          </button>
 
           {answer &&
             (answer.isCorrect ? (
@@ -93,6 +90,6 @@ export const CurrentQuestion = () => {
           </ul>
         </>
       )}
-    </>
+    </div>
   );
 };

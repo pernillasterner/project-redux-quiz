@@ -1,0 +1,23 @@
+.quizContainer {
+  background-color: var(--primary-bg-color);
+  padding: var(--general-smaller-padding);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  .counter {
+    background-color: var(--secondary-bg-color);
+    color: var(--light-grey);
+    border-radius: 30px;
+    font-size: 0.8rem;
+    padding: var(--general-mini-padding);
+
+    .active {
+      color: #fff;
+    }
+  }
+  @media (min-width: 570px) {
+    height: inherit;
+  }
+}
