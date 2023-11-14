@@ -1,6 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
 import { quiz } from "../reducers/quiz";
+// import AnswerStatus from "./AnswerStatus";
 import "./CurrentQuestion.scss";
+
+/**
+ * Highlight Correct Answer (Stretch Goal): Implement highlighting the correct
+ * answer after the user makes a selection.
+ */
 
 export const CurrentQuestion = () => {
   const dispatch = useDispatch();
@@ -56,7 +62,28 @@ export const CurrentQuestion = () => {
             </span>
             <span> / {question.options.length + 1}</span>
           </div>
-          <h2>{question.questionText}</h2>
+          {!answer && <h2>{question.questionText}</h2>}
+
+          {/* TODO: Put in a seperate container */}
+          <div className="checkAnswerContainer">
+            {answer &&
+              (answer.isCorrect ? (
+                <>
+                  <h4>🎉 Congratulations!</h4>
+                  <p>
+                    Right answer is: <br /> {answer.answer}
+                  </p>
+                </>
+              ) : (
+                <>
+                  <h4>😬 Oops, wrong answer.</h4>
+                  <p>
+                    Right answer is: <br /> {answer.answer}
+                  </p>
+                </>
+              ))}
+          </div>
+          {/* until this.... */}
           <ul>
             {question.options.map((option, index) => (
               <li key={index}>
@@ -69,16 +96,6 @@ export const CurrentQuestion = () => {
           <button className="submit" onClick={handleSubmit}>
             continue
           </button>
-
-          {answer &&
-            (answer.isCorrect ? (
-              <p>You got this right!</p>
-            ) : (
-              <>
-                <p>You got this wrong</p>
-                <p>The correct answer is: {answer.answer}</p>
-              </>
-            ))}
         </>
       ) : (
         <>
