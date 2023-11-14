@@ -1,6 +1,4 @@
 export const ProgressBar = ({ currentQuestion, totalQuestions }) => {
-  console.log(currentQuestion);
-
   const calculateProgress = () => {
     return (currentQuestion / totalQuestions) * 100;
   };
