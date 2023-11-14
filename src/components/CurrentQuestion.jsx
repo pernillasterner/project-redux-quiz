@@ -2,11 +2,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { quiz } from "../reducers/quiz";
 // import AnswerStatus from "./AnswerStatus";
 import "./CurrentQuestion.scss";
-import { ProgressBar } from "./ProgressBar";
+import { QuizHeader } from "./QuizHeader/QuizHeader";
 
 /**
- * Highlight Correct Answer (Stretch Goal): Implement highlighting the correct
- * answer after the user makes a selection.
+ * Score System: Implement scoring for correct and deduct points for incorrect answers.
  */
 
 export const CurrentQuestion = () => {
@@ -15,7 +14,7 @@ export const CurrentQuestion = () => {
   const question = useSelector(
     (state) => state.quiz.questions[state.quiz.currentQuestionIndex]
   );
-  console.log(question.id);
+
   const answer = useSelector(
     (state) => state.quiz.answers[state.quiz.currentQuestionIndex]
   );
@@ -57,20 +56,9 @@ export const CurrentQuestion = () => {
     <div className="quizContainer">
       {!quizOver ? (
         <>
-          {/* Need to send in questionId */}
-          <ProgressBar
-            currentQuestion={question.id}
-            totalQuestions={question.options.length + 1}
-          />
-          <div className="counter">
-            <span className={currentQuestionIndex === 0 ? "active" : ""}>
-              {currentQuestionIndex + 1}
-            </span>
-            <span> / {question.options.length + 1}</span>
-          </div>
-          {!answer && <h2>{question.questionText}</h2>}
+          <QuizHeader />
 
-          {/* TODO: Put in a seperate container */}
+          {!answer && <h2>{question.questionText}</h2>}
           <div className="checkAnswerContainer">
             {answer &&
               (answer.isCorrect ? (
