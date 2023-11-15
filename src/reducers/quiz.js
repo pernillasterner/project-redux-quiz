@@ -6,6 +6,7 @@ const initialState = {
   answers: [],
   currentQuestionIndex: 0,
   quizOver: false,
+  score: 0,
 };
 
 export const quiz = createSlice({
@@ -27,6 +28,12 @@ export const quiz = createSlice({
      * When dispatching this action, you should pass an object as the payload with `questionId`
      * and `answerIndex` keys. See the readme for more details.
      */
+
+    // New action to update the score
+    updateScore: (state, action) => {
+      state.score += action.payload;
+    },
+
     submitAnswer: (state, action) => {
       const { questionId, answerIndex } = action.payload;
       const question = state.questions.find((q) => q.id === questionId);
