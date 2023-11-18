@@ -2,6 +2,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { quiz } from "../reducers/quiz";
 import "./CurrentQuestion.scss";
 import { QuizHeader } from "./QuizHeader/QuizHeader";
+import { Summery } from "./Summery";
+import { Welcome } from "./QuizHeader/Welcome";
 
 export const CurrentQuestion = () => {
   const dispatch = useDispatch();
@@ -15,7 +17,7 @@ export const CurrentQuestion = () => {
   );
 
   const answers = useSelector((state) => state.quiz.answers);
-  console.log(answers);
+  // console.log(answers);
   // Use currentQuestionIndex to get the current question number
   const currentQuestionIndex = useSelector(
     (state) => state.quiz.currentQuestionIndex
@@ -31,15 +33,28 @@ export const CurrentQuestion = () => {
   /**
    * returns a payload with questionId and answerIndex
    */
-  const handleSubmitAnswer = (answerIndex) => {
-    // Use dispatch to send the answer to the store
+  const handleSubmitAnswer = (answerIndex, isCorrect) => {
+    // console.log(answerIndex);
+    // console.log(isCorrect);
+
+    // If questionId exists return error message
+    if (answers.some((answer) => answer.questionId === question.id)) {
+      console.log("Already answered this question");
+      return;
+    }
+
     // Use the quiz action to handle the submit answer
     dispatch(
       quiz.actions.submitAnswer({
         questionId: question.id,
         answerIndex,
+        isCorrect,
+        answer: question.options[answerIndex],
       })
     );
+
+    // Update store with new score
+    dispatch(quiz.actions.updateScore(isCorrect ? 10 : -5));
   };
 
   // By clicking on the submit I should add + to question index? in the handler
@@ -49,6 +64,8 @@ export const CurrentQuestion = () => {
 
   return (
     <div className="quizContainer">
+      {/* <Welcome /> */}
+
       {!quizOver ? (
         <>
           <QuizHeader />
@@ -89,14 +106,7 @@ export const CurrentQuestion = () => {
           </button>
         </>
       ) : (
-        <>
-          <p>Your answers</p>
-          <ul>
-            {answers.map((a, index) => (
-              <li key={index}>{a.answer}</li>
-            ))}
-          </ul>
-        </>
+        <>{quizOver && <Summery answers={answers} />}</>
       )}
     </div>
   );
