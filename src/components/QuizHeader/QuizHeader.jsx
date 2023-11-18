@@ -18,6 +18,8 @@ export const QuizHeader = () => {
     (state) => state.quiz.currentQuestionIndex
   );
 
+  const score = useSelector((state) => state.quiz.score);
+
   return (
     <>
       <ProgressBar
@@ -30,7 +32,7 @@ export const QuizHeader = () => {
           totalQuestions={question.options.length}
         />
         <Timer />
-        <Score />
+        <Score score={score} />
       </div>
     </>
   );
