@@ -1,55 +1,16 @@
-.quizContainer {
-  background-color: var(--primary-bg-color);
-  padding: var(--general-smaller-padding);
-  padding-bottom: 50px;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  // min-width: 320px;
-  // max-width: 400px;
-  width: 320px;
-  position: relative;
-  justify-content: space-between;
+.questionContainer {
+  // padding: var(--general-smaller-padding) 0;
 
-  .squareLeft,
-  .squareRight {
-    height: 150px;
-    width: 150px;
-    top: 0;
-    position: absolute;
-    background-repeat: no-repeat;
-    background-size: contain;
-    z-index: 15;
+  .correct {
+    background-color: var(--right-answer-button);
+    border: 1px solid var(--button-border-color);
+    color: #fff;
   }
 
-  .squareLeft {
-    background-image: url("./../assets/squareLeft.svg");
-    left: -3px;
-  }
-
-  .squareRight {
-    background-image: url("./../assets/squareRight.svg");
-    right: -94px;
-  }
-
-  .questionContainer {
-    padding: var(--general-smaller-padding) 0;
-
-    .correct {
-      background-color: var(--right-answer-button);
-      border: 1px solid var(--button-border-color);
-      color: #fff;
-    }
-
-    .incorrect {
-      background-color: var(--primary-bg-color);
-      border: 1px solid #8b0802;
-      color: #92a4b0;
-      text-decoration: line-through;
-    }
-  }
-  @media (min-width: 670px) {
-    height: inherit;
+  .incorrect {
+    background-color: var(--primary-bg-color);
+    border: 1px solid #8b0802;
+    color: #92a4b0;
+    text-decoration: line-through;
   }
 }
