@@ -12,7 +12,7 @@ import { AnswerStatus } from "../AnswerStatus/AnswerStatus";
  * 1. Kolla om svaret är rätt eller fel. ✅
  * 2. Ge ut rätt svar ✅
  * 3. Färgen på knapparna ska ändras beroende på om svaret är rätt eller fel.✅
- * 4. Uppdatera score beroende på svaret. Det ska finnas en counter också
+ * 4. Uppdatera score beroende på svaret. Det ska finnas en counter också ✅
  */
 
 export const CurrentQuestion = () => {
