@@ -29,13 +29,8 @@ export const quiz = createSlice({
      * and `answerIndex` keys. See the readme for more details.
      */
 
-    // New action to update the score
-    updateScore: (state, action) => {
-      state.score += action.payload;
-    },
-
     submitAnswer: (state, action) => {
-      const { questionId, answerIndex } = action.payload;
+      const { questionId, answerIndex, score } = action.payload;
       const question = state.questions.find((q) => q.id === questionId);
 
       if (!question) {
@@ -56,6 +51,7 @@ export const quiz = createSlice({
         question,
         answer: question.options[answerIndex],
         isCorrect: question.correctAnswerIndex === answerIndex,
+        score,
       });
     },
 
