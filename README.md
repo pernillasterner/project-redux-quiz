@@ -28,7 +28,7 @@ Describe how you approached to problem, and what tools and techniques you used t
 
 ### View it live
 
-[Movie Site App](https://technigo-project-movie-site.netlify.app/)
+[MultiSite Quiz App](https://technigo-project-multisize-quiz.netlify.app/)
 
 ## Instructions
 
