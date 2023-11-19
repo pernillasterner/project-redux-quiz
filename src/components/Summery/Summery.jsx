@@ -1,24 +1,36 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "./Summery.scss";
+import { quiz } from "../../reducers/quiz";
 
-export const Summery = ({ answers }) => {
+export const Summery = () => {
+  const dispatch = useDispatch();
   const score = useSelector((state) => state.quiz.score);
+  const answers = useSelector((state) => state.quiz.answers);
   let scoreText = "";
+  let correctAnswer = 0;
+  let incorrectAnswer = 0;
 
-  switch (score) {
-    case score > 10:
-      scoreText = "Well done! 👏";
-      break;
-    case score < 0 && score < 10:
-      scoreText = "Keep it up! 🚀";
-      break;
-    default:
-      scoreText = "Better luck next time! 👻";
+  if (score > 10 && score <= 15) {
+    scoreText = "Well done! 👏";
+  } else if (score >= 0 && score <= 10) {
+    scoreText = "Keep it up! 🚀";
+  } else if (score > 15) {
+    scoreText = "Wow, you really know things about interior design! 🚀";
+  } else {
+    scoreText = "Better luck next time! 👻";
   }
 
-  const handleSubmit = () => {
-    console.log("New Quiz!");
+  const handleRestart = () => {
+    dispatch(quiz.actions.restart());
   };
+
+  answers.forEach((answer) => {
+    if (answer.isCorrect) {
+      correctAnswer++;
+    } else {
+      incorrectAnswer++;
+    }
+  });
 
   return (
     <>
@@ -34,8 +46,8 @@ export const Summery = ({ answers }) => {
         {/* check how many isCorrect there is. */}
 
         <div className="numAnswers">
-          <p>Correct answers: 10</p>
-          <p>Wrong answers: 4</p>
+          <p>Correct answers: {correctAnswer}</p>
+          <p>Wrong answers: {incorrectAnswer}</p>
         </div>
 
         <div className="detailsContainer">
@@ -57,8 +69,8 @@ export const Summery = ({ answers }) => {
             </>
           ))}
         </div>
-        <button className="submit" onClick={handleSubmit}>
-          new challange
+        <button className="submit" onClick={handleRestart}>
+          restart quiz
         </button>
       </div>
     </>
