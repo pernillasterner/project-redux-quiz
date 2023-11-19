@@ -40,7 +40,7 @@
 /* GENERAL*/
 body {
   font-family: "Poppins", "Montserrat", sans-serif;
-  background-color: #cfcfcf;
+  background-color: var(--primary-bg-color);
   height: 100vh;
   color: var(--primary-text);
   font-size: 1.25rem;
@@ -101,11 +101,10 @@ input {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  // min-width: 320px;
-  // max-width: 400px;
-  width: 320px;
+  max-width: 520px;
   position: relative;
   justify-content: space-between;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.29);
 
   &.end {
     justify-content: end;
