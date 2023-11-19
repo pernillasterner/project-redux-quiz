@@ -35,28 +35,6 @@
   --general-mini-padding: 10px;
 
   --border-radius: 10px;
-
-  /* 
-  --primary-color: #ff276f;
-  --primary-text: #f7f7f7;
-  --secondary-color: #676080;
-  --bg-dark: #15121f;
-  --bg-light: #231f33;
-  --opacity-dark: rgba(0, 0, 0, 0.6);
-  --opacity-light: rgba(0, 0, 0, 0.3);
-  --hover-color: rgb(188, 188, 188);
-  --box-shadow: 8px 8px 0px 0px rgba(0, 0, 0, 1);
-
-  --general-padding: 35px;
-  --general-smaller-padding: 20px;
-  --general-mini-padding: 10px;
-
-  --general-smaller-margin: 20px;
-
-  --main-width-mobile: 90%;
-  --main-width-desktop: 70%;
-
-  --button-border-color: #a3a3a35a; */
 }
 
 /* GENERAL*/
@@ -69,7 +47,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  line-height: 1.5;
 }
 
 ul {
@@ -92,7 +69,7 @@ input {
   width: 100%;
   text-align: start;
   padding: var(--general-mini-padding);
-  height: 50px;
+  height: 45px;
   font-size: 0.9rem;
 }
 
@@ -106,10 +83,55 @@ button.submit {
   color: #fff;
   text-align: center;
   text-transform: capitalize;
+  padding: var(--general-mini-padding) 0;
+  margin: 0.5em 0;
 }
 
 input {
   color: var(--secondary-text);
   background-color: var(--primary-bg-color);
   border: 1px solid #808080;
+}
+
+.quizContainer {
+  background-color: var(--primary-bg-color);
+  padding: var(--general-smaller-padding);
+  padding-bottom: 50px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  // min-width: 320px;
+  // max-width: 400px;
+  width: 320px;
+  position: relative;
+  justify-content: space-between;
+
+  &.end {
+    justify-content: end;
+  }
+
+  .squareLeft,
+  .squareRight {
+    height: 150px;
+    width: 150px;
+    top: -4px;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: contain;
+    z-index: 15;
+  }
+
+  .squareLeft {
+    background-image: url("./assets/squareLeft.svg");
+    left: 0;
+  }
+
+  .squareRight {
+    background-image: url("./assets/squareRight.svg");
+    right: -91px;
+  }
+  @media (min-width: 670px) {
+    height: inherit;
+  }
 }
