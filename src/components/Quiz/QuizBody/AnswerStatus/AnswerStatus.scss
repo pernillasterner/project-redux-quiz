@@ -1,0 +1,16 @@
+// Answer container
+.headerContainer {
+  height: 100px;
+  text-align: center;
+
+  .questionText {
+    text-align: start;
+  }
+
+  p {
+    padding: var(--general-mini-padding);
+    font-size: 0.8rem;
+    font-weight: 500;
+    white-space: break-spaces;
+  }
+}
