@@ -7,6 +7,7 @@
   box-sizing: border-box;
   outline: none;
   font-weight: 700;
+  width: 100%;
 }
 :root {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -101,10 +102,13 @@ input {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  width: 100%;
+  margin: 0 auto;
   max-width: 520px;
   position: relative;
   justify-content: space-between;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.29);
+  max-height: 700px;
 
   &.end {
     justify-content: end;
@@ -129,8 +133,5 @@ input {
   .squareRight {
     background-image: url("./assets/squareRight.svg");
     right: -91px;
-  }
-  @media (min-width: 670px) {
-    height: inherit;
   }
 }
