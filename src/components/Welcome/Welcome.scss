@@ -1,0 +1,32 @@
+.welcomeContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  height: 100%;
+
+  .logoContainer {
+    width: 60px;
+    height: 60px;
+    background: #fff;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2.5em 0 1.5em;
+    .logo {
+      color: var(--secondary-color);
+      font-size: 2.2rem;
+    }
+  }
+  h1 {
+    line-height: 1;
+  }
+  .instructions {
+    font-size: 1rem;
+    margin: 2.5em 0 3.5em;
+  }
+
+  button {
+    margin-top: 2em;
+  }
+}
