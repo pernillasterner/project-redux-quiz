@@ -11,7 +11,8 @@ import { AnswerStatus } from "../AnswerStatus/AnswerStatus";
  *
  * 1. Kolla om svaret är rätt eller fel. ✅
  * 2. Ge ut rätt svar ✅
- * 3. Färgen på knapparna ska ändras beroende på om svaret är rätt eller fel.
+ * 3. Färgen på knapparna ska ändras beroende på om svaret är rätt eller fel.✅
+ * 4. Uppdatera score beroende på svaret. Det ska finnas en counter också
  */
 
 export const CurrentQuestion = () => {
@@ -47,8 +48,6 @@ export const CurrentQuestion = () => {
         answer: question.options[answerIndex],
       })
     );
-
-    dispatch(quiz.actions.updateScore(isCorrect ? 10 : -5));
   };
 
   const handleSubmit = () => {
@@ -58,7 +57,7 @@ export const CurrentQuestion = () => {
   };
 
   const getButtonStyle = (buttonIndex) => {
-    if (clickedButtonIndex && correctAnswerIndex === buttonIndex) {
+    if (clickedButtonIndex !== null && correctAnswerIndex === buttonIndex) {
       return "correct";
     } else if (
       clickedButtonIndex === buttonIndex &&
