@@ -49,10 +49,12 @@ export const CurrentQuestion = () => {
   };
 
   const handleSubmit = () => {
+    let noAnswerResponse = document.querySelector(".noAnswer");
     if (!answer) {
-      document.querySelector(".noAnswer").innerHTML =
+      noAnswerResponse.innerHTML =
         "You need to answer this question before continuing";
     } else {
+      noAnswerResponse.innerHTML = "";
       dispatch(quiz.actions.goToNextQuestion());
     }
 
