@@ -3,7 +3,6 @@ import { useState } from "react";
 import { quiz } from "../../../../reducers/quiz";
 import "./CurrentQuestion.scss";
 import { QuizHeader } from "../../QuizHeader/QuizHeader";
-import { Summery } from "../../../Summery/Summery";
 import { AnswerStatus } from "../AnswerStatus/AnswerStatus";
 
 /**
@@ -25,7 +24,6 @@ export const CurrentQuestion = () => {
     (state) => state.quiz.answers[state.quiz.currentQuestionIndex]
   );
   const answers = useSelector((state) => state.quiz.answers);
-  const quizOver = useSelector((state) => state.quiz.quizOver);
   const correctAnswerIndex = question.correctAnswerIndex;
 
   // State to track the index of the clicked button
@@ -51,7 +49,13 @@ export const CurrentQuestion = () => {
   };
 
   const handleSubmit = () => {
-    dispatch(quiz.actions.goToNextQuestion());
+    if (!answer) {
+      document.querySelector(".noAnswer").innerHTML =
+        "You need to answer this question before continuing";
+    } else {
+      dispatch(quiz.actions.goToNextQuestion());
+    }
+
     // reset the colors
     setClickedButtonIndex(null);
   };
@@ -71,41 +75,36 @@ export const CurrentQuestion = () => {
 
   return (
     <>
-      {!quizOver ? (
-        <>
-          <QuizHeader />
-          <div className="quizBody">
-            <div className="headerContainer">
-              {!answer ? (
-                <h2 className="questionText">{question.questionText}</h2>
-              ) : (
-                <AnswerStatus
-                  correctAnswer={question.options[correctAnswerIndex]}
-                  isCorrect={answer.isCorrect}
-                />
-              )}
-            </div>
+      <QuizHeader />
+      <div className="quizBody">
+        <div className="headerContainer">
+          {!answer ? (
+            <h2 className="questionText">{question.questionText}</h2>
+          ) : (
+            <AnswerStatus
+              correctAnswer={question.options[correctAnswerIndex]}
+              isCorrect={answer.isCorrect}
+            />
+          )}
+        </div>
 
-            <ul className="questionContainer">
-              {question.options.map((option, index) => (
-                <li key={index}>
-                  <button
-                    className={getButtonStyle(index)}
-                    onClick={() => handleSubmitAnswer(index)}
-                  >
-                    {option}
-                  </button>
-                </li>
-              ))}
-            </ul>
-            <button className="submit" onClick={handleSubmit}>
-              continue
-            </button>
-          </div>
-        </>
-      ) : (
-        <>{quizOver && <Summery answers={answers} />}</>
-      )}
+        <ul className="questionContainer">
+          {question.options.map((option, index) => (
+            <li key={index}>
+              <button
+                className={getButtonStyle(index)}
+                onClick={() => handleSubmitAnswer(index)}
+              >
+                {option}
+              </button>
+            </li>
+          ))}
+        </ul>
+        <button className="submit" onClick={handleSubmit}>
+          continue
+        </button>
+        <p className="noAnswer"></p>
+      </div>
     </>
   );
 };
