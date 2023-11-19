@@ -1,0 +1,36 @@
+.summeryContainer {
+  //   margin-top: 19em;
+  .score {
+    font-size: 1.8rem;
+  }
+  .scoreText {
+    font-size: 1.8rem;
+    line-height: 1;
+    padding-top: var(--general-smaller-padding);
+    padding-bottom: var(--general-mini-padding);
+  }
+
+  .subTitle,
+  p {
+    font-size: 0.7rem;
+  }
+
+  .numAnswers {
+    font-size: 0.8rem;
+    padding: var(--general-smaller-padding) 0;
+    p {
+      font-weight: 500;
+    }
+  }
+
+  .detailsContainer {
+    overflow: scroll;
+    height: 350px;
+    h4 {
+      font-size: 0.9rem;
+    }
+    p {
+      font-size: 0.7rem;
+    }
+  }
+}
