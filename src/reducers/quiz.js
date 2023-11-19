@@ -28,6 +28,9 @@ export const quiz = createSlice({
      * When dispatching this action, you should pass an object as the payload with `questionId`
      * and `answerIndex` keys. See the readme for more details.
      */
+    updateScore: (state, action) => {
+      state.score += action.payload;
+    },
 
     submitAnswer: (state, action) => {
       const { questionId, answerIndex, score } = action.payload;
@@ -51,7 +54,7 @@ export const quiz = createSlice({
         question,
         answer: question.options[answerIndex],
         isCorrect: question.correctAnswerIndex === answerIndex,
-        score,
+        score: 0,
       });
     },
 
