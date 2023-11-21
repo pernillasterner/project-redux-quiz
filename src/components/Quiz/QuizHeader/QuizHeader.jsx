@@ -10,24 +10,22 @@ import { Timer } from "./Timer";
  */
 
 export const QuizHeader = () => {
-  const question = useSelector(
-    (state) => state.quiz.questions[state.quiz.currentQuestionIndex]
-  );
-
   const currentQuestionIndex = useSelector(
     (state) => state.quiz.currentQuestionIndex
   );
+
+  const questions = useSelector((state) => state.quiz.questions);
 
   return (
     <div className="quizHeader">
       <ProgressBar
         currentQuestion={currentQuestionIndex}
-        totalQuestions={question.options.length}
+        totalQuestions={questions.length - 1}
       />
       <div className="counters">
         <Counter
           currentQuestionIndex={currentQuestionIndex}
-          totalQuestions={question.options.length}
+          totalQuestions={questions.length - 1}
         />
         <Timer />
         <Score />
