@@ -3,7 +3,7 @@ export const questions = [
     id: 1,
     questionText: "Is Philippe Starck a renowned French designer?",
     options: ["Yes", "No"],
-    image: "/src/assets/images/R1304N_STARCK.jpg",
+    image: "../../public/images/R1304N_STARCK.jpg",
     correctAnswerIndex: 0,
   },
   {
