@@ -5,15 +5,6 @@ import "./CurrentQuestion.scss";
 import { QuizHeader } from "../../QuizHeader/QuizHeader";
 import { AnswerStatus } from "../AnswerStatus/AnswerStatus";
 
-/**
- * När jag klickar på ett svarsalternativ så ska följande ske
- *
- * 1. Kolla om svaret är rätt eller fel. ✅
- * 2. Ge ut rätt svar ✅
- * 3. Färgen på knapparna ska ändras beroende på om svaret är rätt eller fel.✅
- * 4. Uppdatera score beroende på svaret. Det ska finnas en counter också ✅
- */
-
 export const CurrentQuestion = () => {
   const dispatch = useDispatch();
 
@@ -25,6 +16,7 @@ export const CurrentQuestion = () => {
   );
   const answers = useSelector((state) => state.quiz.answers);
   const correctAnswerIndex = question.correctAnswerIndex;
+  const timer = useSelector((state) => state.quiz.timer);
 
   // State to track the index of the clicked button
   const [clickedButtonIndex, setClickedButtonIndex] = useState(null);
@@ -35,6 +27,7 @@ export const CurrentQuestion = () => {
       return;
     }
 
+    dispatch(quiz.actions.stopTimer());
     // change background color
     setClickedButtonIndex(answerIndex);
 
@@ -44,6 +37,8 @@ export const CurrentQuestion = () => {
         answerIndex,
         isCorrect,
         answer: question.options[answerIndex],
+        score: 0,
+        timer,
       })
     );
   };
@@ -54,7 +49,12 @@ export const CurrentQuestion = () => {
       noAnswerResponse.innerHTML =
         "You need to answer this question before continuing";
     } else {
+      console.log(timer);
+      console.log("reset");
       noAnswerResponse.innerHTML = "";
+      dispatch(quiz.actions.updateTotalTime(timer));
+      dispatch(quiz.actions.resetTimer());
+      dispatch(quiz.actions.stopTimer());
       dispatch(quiz.actions.goToNextQuestion());
     }
 
@@ -80,8 +80,26 @@ export const CurrentQuestion = () => {
       <QuizHeader />
       <div className="quizBody">
         <div className="headerContainer">
+          {question.image && (
+            <img
+              src={question.image}
+              alt={`Question ${question.id}`}
+              className="questionImage"
+            />
+          )}
           {!answer ? (
-            <h2 className="questionText">{question.questionText}</h2>
+            <>
+              {timer === 0 ? (
+                <>
+                  <h2 className="questionText" style={{ textAlign: "center" }}>
+                    Oops! Time is up.
+                  </h2>
+                  <p> What would you guess the correct answer is?</p>
+                </>
+              ) : (
+                <h2 className="questionText">{question.questionText}</h2>
+              )}
+            </>
           ) : (
             <AnswerStatus
               correctAnswer={question.options[correctAnswerIndex]}
