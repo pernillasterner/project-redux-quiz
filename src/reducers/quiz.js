@@ -7,6 +7,9 @@ const initialState = {
   currentQuestionIndex: 0,
   quizOver: false,
   score: 0,
+  timer: 10,
+  totalTime: 0,
+  stopTimer: true,
 };
 
 export const quiz = createSlice({
@@ -32,12 +35,27 @@ export const quiz = createSlice({
       state.score += action.payload;
     },
 
-    updateTimer: (state, action) => {
-      state.timer = action.payload;
+    decrementTimer: (state) => {
+      if (state.timer > 0) {
+        state.timer -= 1;
+      }
+    },
+
+    resetTimer: (state) => {
+      state.timer = 10;
+    },
+
+    stopTimer: (state) => {
+      state.timer;
+      state.stopTimer = !state.stopTimer;
+    },
+
+    updateTotalTime: (state, action) => {
+      state.totalTime += 10 - action.payload;
     },
 
     submitAnswer: (state, action) => {
-      const { questionId, answerIndex } = action.payload;
+      const { questionId, answerIndex, score, timer } = action.payload;
       const question = state.questions.find((q) => q.id === questionId);
 
       if (!question) {
@@ -58,8 +76,8 @@ export const quiz = createSlice({
         question,
         answer: question.options[answerIndex],
         isCorrect: question.correctAnswerIndex === answerIndex,
-        score: 0,
-        timer: 0,
+        score,
+        timer,
       });
     },
 
