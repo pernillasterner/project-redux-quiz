@@ -19,3 +19,9 @@
   color: red;
   font-weight: 500;
 }
+
+.quizBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
