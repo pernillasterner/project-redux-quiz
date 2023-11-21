@@ -42,10 +42,40 @@
     display: flex;
     align-items: center;
     text-align: center;
+    color: var(--secondary-color);
+    font-size: 2rem;
+  }
 
-    .logo {
-      color: var(--secondary-color);
-      font-size: 2.2rem;
-    }
+  .timer {
+    position: relative;
+    width: 50px; /* Adjust the width as needed */
+    height: 50px; /* Adjust the height as needed */
+    border-radius: 50%;
+    background-color: #f0f0f0; /* Light grey background color */
+  }
+
+  .timer-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    clip-path: polygon(0% 0%, 0% 100%, 100% 0%);
+    transition: clip-path 1s linear;
+  }
+
+  .timer-overlay.half {
+    clip-path: polygon(50% 0%, 0% 0%, 0% 100%, 100% 0%);
+  }
+
+  .timer-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    color: white;
   }
 }
