@@ -1,7 +1,11 @@
 // Answer container
 .headerContainer {
-  height: 100px;
+  // height: 100px;
   text-align: center;
+
+  img {
+    width: 300px;
+  }
 
   .questionText {
     text-align: start;
